@@ -1,0 +1,24 @@
+
+private final By lnkSignin= By.xpath("");
+
+
+
+private void clickSignin()
+{
+  if(elementReady(lnkSignin,waitTime))
+  {
+    try
+    {
+      btnclick(lnkSignin);
+      report.updateTestLog(pageName,"Signin element is clicked: ", Status.DONE);
+     }
+    catch(Exception e)
+    {
+       report.updateTestLog(pageName,"Signin element is not clicked: "+e.getMessage(),Status.FAIL);
+    }
+  }
+  else
+  {
+    report.updateTestLog(pageName,"Signin Field is not displayed", Status.FAIL);
+  }
+}

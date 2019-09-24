@@ -1,0 +1,102 @@
+
+private final By txtUserName= By.xpath("");
+private final By txtPassword= By.xpath("");
+private final By btnLoginButton= By.xpath("");
+private final By drpCountry= By.xpath("");
+
+private String userName;
+private String password;
+private String country;
+
+private void initializeData()
+ {
+    try
+    {
+	userName= dataTable.getData("Login Page","User Name");
+	password= dataTable.getData("Login Page","Password");
+	country= dataTable.getData("Login Page","Country");
+      report.updateTestLog(pageName,"Data is loaded from data table successfully", Status.DONE);
+    }
+    catch(Exception e)
+    {
+       report.updateTestLog(pageName,"Error in reading data from data table: "+e.getMessage(),Status.FAIL);
+    }
+ }
+
+private void enterUserName()
+{
+  if(!userName.isEmpty() && elementReady(txtUserName,waitTime))
+  {
+    try
+    {
+      enterText(txtUserName,userName);
+      report.updateTestLog(pageName,"User Name value is entered: "+userName, Status.DONE);
+     }
+    catch(Exception e)
+    {
+       report.updateTestLog(pageName,"User Name value is not entered: "+e.getMessage(),Status.FAIL);
+    }
+  else
+  {
+    if(!userName.isEmpty())
+    report.updateTestLog(pageName,"User Name Field is not displayed", Status.FAIL);
+  }
+}
+private void enterPassword()
+{
+  if(!password.isEmpty() && elementReady(txtPassword,waitTime))
+  {
+    try
+    {
+      enterText(txtPassword,password);
+      report.updateTestLog(pageName,"Password value is entered: "+password, Status.DONE);
+     }
+    catch(Exception e)
+    {
+       report.updateTestLog(pageName,"Password value is not entered: "+e.getMessage(),Status.FAIL);
+    }
+  else
+  {
+    if(!password.isEmpty())
+    report.updateTestLog(pageName,"Password Field is not displayed", Status.FAIL);
+  }
+}
+private void clickLoginButton()
+{
+  if(elementReady(btnLoginButton,waitTime))
+  {
+    try
+    {
+      btnclick(btnLoginButton);
+      report.updateTestLog(pageName,"Login Button element is clicked: ", Status.DONE);
+     }
+    catch(Exception e)
+    {
+       report.updateTestLog(pageName,"Login Button element is not clicked: "+e.getMessage(),Status.FAIL);
+    }
+  }
+  else
+  {
+    report.updateTestLog(pageName,"Login Button Field is not displayed", Status.FAIL);
+  }
+}
+private void selectCountry()
+{
+  if(!country.isEmpty() && elementReady(drpCountry,waitTime))
+  {
+    try
+    {
+      enterText(drpCountry,country);
+      selectdropdownValue(drpCountry,country);
+      report.updateTestLog(pageName,"Country value is not selected: "+country, Status.DONE);
+     }
+    catch(Exception e)
+    {
+       report.updateTestLog(pageName,"Country value is not selected: "+e.getMessage(),Status.FAIL);
+    }
+  else
+  {
+    if(!country.isEmpty())
+    report.updateTestLog(pageName,"Country Field is not displayed", Status.FAIL);
+  }
+}
